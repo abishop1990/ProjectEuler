@@ -28,4 +28,4 @@ end
 
 puts "Num paths in a 20x20 grid is #{calcGridPaths(20,20)}"
 
-puts "Elapsed Time #{Time.now}"
+puts "Elapsed Time #{Time.now-start} seconds"
