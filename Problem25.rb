@@ -3,7 +3,7 @@ Project Euler Problem #25
 
 Written By Alan Bishop 6/4/14
 
-Gets the first Fibonacci number with 1000+
+Gets the first Fibonacci number with 1000+ digits
 =end
 
 start = Time.now
