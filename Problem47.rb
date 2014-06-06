@@ -17,8 +17,6 @@ end
 
 $primes = Array.new
 found = 0
-
-
 i = 2
 while found < 4 do
     nf = numPrimeFactors(i)
@@ -34,6 +32,6 @@ while found < 4 do
     i += 1
 end
 
-puts "The first of the 4 numbers is #{i-3}"
+puts "The first of the 4 numbers is #{i-4}"
 
 puts "Elapsed Time #{Time.now-start} seconds"
