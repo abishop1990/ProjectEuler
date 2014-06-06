@@ -60,5 +60,4 @@ end
 
 
 
-
 puts "Elapsed Time #{Time.now-start} seconds"
