@@ -68,7 +68,7 @@ while i > 0 do
         else
             triangle[i-1][j] += triangle[i][j+1]
         end
-        puts "Tri[#{i-1}][#{j}] = #{triangle[i-1][j]}"
+        #puts "Tri[#{i-1}][#{j}] = #{triangle[i-1][j]}"
     end
     i -= 1
 end
