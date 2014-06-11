@@ -26,7 +26,6 @@ end
 nameFile = File.open("data/names.txt").gets or die "Can't open names.txt"
 names = nameFile.gsub!('"','').split(',').sort
 
-
 sum = 0
 position = 1
 names.each do |name|
