@@ -22,21 +22,32 @@ class Integer
         return true if self < self.sumOfFactors
         return false
     end 
-
     def sumOfFactors
-        sum = 1
-        for i in 2..Math.sqrt(self) do 
-            sum += self/i + i if self%i == 0
+        return 0 if self <3
+        sum = 0
+        for i in 2..(self-1)
+            if self%i == 0
+                sum += i
+            end
         end
+=begin
+        #This is more correct but my logic isn't working...
+        sum = 1
+        for i in 2..Math.sqrt(self)
+            if self%i == 0
+                sum += i 
+                sum += self/i if self/i != sum
+            end
+        end
+=end
         return sum
     end
-
 end
 
 #Get array of abundant numbers
 $abundantNumbers = Array.new
 max = 0
-for i in 2..$MAX  do
+for i in 2..$MAX 
     if(i.isAbundant)
         $abundantNumbers[max] = i
         max += 1
@@ -44,20 +55,25 @@ for i in 2..$MAX  do
 end
 
 puts "#{$abundantNumbers.size} numbers"
-
-ANSums = []
-#Get all sums
-$abundantNumbers.each do |a|
-    $abundantNumbers.each do |b|
-        sum = a+b
-        if sum <= $MAX && a != b
-            ANSums.push(sum)
-        else 
+CanBeANSum = Array.new
+for i in 0..($abundantNumbers.size-1) 
+    for j in i..($abundantNumbers.size-1)
+        tsum = $abundantNumbers[i] + $abundantNumbers[j]
+        if tsum <= $MAX
+            CanBeANSum[tsum] = true
+        else
             break
         end
     end
 end
 
+sum = 0
+for i in 1..$MAX
+    if(CanBeANSum[i] == nil) 
+        sum += i
+    end
+end
 
+puts "Sum of all numbers that can't be a sum of 2 ANs is #{sum}"
 
 puts "Elapsed Time #{Time.now-start} seconds"
