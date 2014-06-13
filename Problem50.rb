@@ -24,33 +24,40 @@ def getAllPrimesTo(n)
     nums.compact
 end
 
-primes = getAllPrimesTo(1000000)
+
+$MAX_PRIMES = 1000000
+
+primes = getAllPrimesTo($MAX_PRIMES)
 puts "Found #{primes.length} Primes, Highest: #{primes.max}"
 
-maxPrime = 0
-sum = 0
-endN = 0
+#Get all sums of the primes (but it's a lot)
+primeSums = Array.new
+primeSums[0] = 0
+for i in 0..primes.length-1
+    primeSums[i+1] = primeSums[i] + primes[i]
+end
 
-for startN in 0..primes.length
-    #Find highest valid num
-    for i in endN..primes.length
-        sum += primes[i]
-        endN = i
-        break if sum > primes.max
-        if primes.include?(sum) && maxPrime < sum
-            puts "New maxPrime = #{sum} (start = #{startN}, end = #{endN})"
-            maxPrime = sum
+maxPrime = 0
+
+#Hunt down our answer
+numPrimes = 0
+i = primes.length
+for i in 0..primeSums.length-1
+    j = i-(numPrimes+1)
+    while j >= 0
+        diff = primeSums[i]-primeSums[j]
+        break if diff > primes.max
+        idx = primes.index(diff)
+        if(idx)
+            numPrimes = i - j
+            maxPrime = primeSums[i] - primeSums[j]
+            puts "maxPrime is now #{maxPrime}, #{i}"
         end
+        j -= 1
     end
-    #Get a good starting point for next iteration
-    while sum > primes.max || (!primes.include?(sum) && sum > 0)
-        sum -= primes[endN]
-        endN -= 1
-    end
-    sum -= primes[startN]
 end
 
 
-puts "Sum below 1,000,000 with longest consecutive primes sum is #{maxPrime}"
+puts "Sum below #{$MAX_PRIMES} with longest consecutive primes sum is #{maxPrime}"
 
 puts "Total Runtime: #{Time.now-start} Seconds."
