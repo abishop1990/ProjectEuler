@@ -19,12 +19,19 @@ Find the sum of all 0 to 9 pandigital numbers with this property."
 
 start = Time.now
 
-primes = [2,3,5,7,11,13,17]
 
-def hasProperty(nStr)
-    nArr = n.split(//)
+def hasProperty(n)
+
+    primes = [2,3,5,7,11,13,17]
+    nStr = n.to_s
+    nArr = nStr.split(//)
     for i in 0..6 
-        return false if nArr.slice(i+1..i+4).to_i % primes[i] != 0
+        newNum = nArr.slice(i+1..i+3).join.to_i
+        #puts "newNum=#{newNum}"
+        if(newNum%primes[i] != 0)
+            #puts "Failing, #{newNum}/#{primes[i]} != 0"
+            return false
+        end
     end
     puts "#{nStr} has property"
     return true
@@ -32,12 +39,14 @@ end
 
 
 #Build array of all pandigital nums
-pandigitals = [0,1,2,3,4,5,6,7,8,9].permutation(10).to_a.join
+pandigitals = [0,1,2,3,4,5,6,7,8,9].permutation(10).to_a.map(&:join).select{ |n| hasProperty(n.to_i) }
+
+#puts pandigitals.length
 
 #Iterate through
 sum = 0
 pandigitals.each do |n|
-    sum += n if hasProperty(n.to_s)
+    sum += n.to_i
 end
 
 
