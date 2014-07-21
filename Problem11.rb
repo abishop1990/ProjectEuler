@@ -79,7 +79,7 @@ end
 #Vertical
 (0..16).each do |y|
     (0..19).each do |x|
-        currentProduct = grid[x][y] * grid[x][y+1] * grid[x][y+2] * grid[x][y+2]
+        currentProduct = grid[x][y] * grid[x][y+1] * grid[x][y+2] * grid[x][y+3]
         highestProduct = currentProduct if currentProduct > highestProduct
     end
 end
